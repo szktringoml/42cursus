@@ -6,11 +6,11 @@
 /*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 07:30:59 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/13 13:00:24 by string           ###   ########.fr       */
+/*   Updated: 2023/06/20 08:48:27 by string           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {

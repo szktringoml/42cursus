@@ -6,11 +6,11 @@
 /*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:46:53 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/06 09:54:21 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/06/20 08:48:50 by string           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {

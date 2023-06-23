@@ -6,11 +6,11 @@
 /*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 06:14:32 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/12 13:14:53 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/06/20 08:48:43 by string           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 #include <stdlib.h>
 
 char	*ft_strdup(const char *str)

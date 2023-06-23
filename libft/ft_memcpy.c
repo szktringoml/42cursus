@@ -6,11 +6,11 @@
 /*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 12:51:47 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/14 12:20:31 by string           ###   ########.fr       */
+/*   Updated: 2023/06/20 08:49:52 by string           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 void	*ft_memcpy(void *buf, const void *src, size_t n)
 {

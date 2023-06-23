@@ -6,11 +6,11 @@
 /*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 08:15:46 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/14 12:18:43 by string           ###   ########.fr       */
+/*   Updated: 2023/06/20 08:50:13 by string           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 int	ft_lstsize(t_list *lst)
 {
@@ -22,5 +22,5 @@ int	ft_lstsize(t_list *lst)
 		i++;
 		lst = lst->next;
 	}
-	return ((int)i);
+	return (i);
 }

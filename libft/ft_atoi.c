@@ -6,11 +6,11 @@
 /*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 07:36:51 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/06 09:43:47 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/06/20 08:51:47 by string           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 int	ft_atoi(const char *str)
 {

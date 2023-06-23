@@ -6,10 +6,11 @@
 /*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 11:44:29 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/06 07:56:58 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/06/22 11:07:12 by string           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <libft.h>
+
+#include "libft.h"
 #include <unistd.h>
 
 void	ft_putnbr_fd(int n, int fd)

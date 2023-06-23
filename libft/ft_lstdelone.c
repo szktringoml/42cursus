@@ -6,11 +6,11 @@
 /*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 06:27:17 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/13 13:04:46 by string           ###   ########.fr       */
+/*   Updated: 2023/06/20 08:50:46 by string           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 #include <stdlib.h>
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))

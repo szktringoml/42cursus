@@ -45,19 +45,25 @@ LST			= ft_lstnew.c \
 
 OBJS		= ${SRCS:.c=.o}
 BONUS_OBJS	= ${LST:.c=.o}
+ifdef WITH_BONUS
+	SRCS += ${LST}
+	OBJS += ${BONUS_OBJS}
+endif
 NAME		= libft.a
 RM			= rm -f
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -I .
-%.c%.o:
+CFLAGS		= -Wall -Wextra -Werror
+%c%.o:
 			${CC} ${CFLAGS} $< -o ${<:.c=.o}
 ${NAME}:	${OBJS}
 			ar rcs ${NAME} ${OBJS}
-bonus:	${OBJS} ${BONUS_OBJS}
-			ar rcs ${NAME} ${OBJS} ${BONUS_OBJS}
+bonus:	
+	make WITH_BONUS=1 ${NAME}
 all:		${NAME}
 clean:	
 			${RM} ${OBJS} ${BONUS_OBJS}
 fclean:		clean
 			${RM} ${NAME}
 re:			fclean all
+
+.PHONY: all bonus clean fclean re

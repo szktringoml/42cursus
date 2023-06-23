@@ -1,64 +1,39 @@
-SRCS		= libft/ft_isalpha.c \
-			  libft/ft_isdigit.c \
-			  libft/ft_isalnum.c \
-			  libft/ft_isascii.c \
-			  libft/ft_isprint.c \
-			  libft/ft_strlen.c \
-			  libft/ft_memset.c \
-			  libft/ft_bzero.c \
-			  libft/ft_memcpy.c \
-			  libft/ft_memmove.c \
-			  libft/ft_strlcpy.c \
-			  libft/ft_strlcat.c \
-			  libft/ft_toupper.c \
-			  libft/ft_tolower.c \
-			  libft/ft_strncmp.c \
-			  libft/ft_memchr.c \
-			  libft/ft_memcmp.c \
-			  libft/ft_strdup.c \
-			  libft/ft_strchr.c \
-			  libft/ft_strrchr.c \
-			  libft/ft_atoi.c \
-			  libft/ft_strnstr.c \
-			  libft/ft_strmapi.c \
-			  libft/ft_substr.c \
-			  libft/ft_strjoin.c \
-			  libft/ft_strtrim.c \
-			  libft/ft_itoa.c \
-			  libft/ft_striteri.c \
-			  libft/ft_putchar_fd.c \
-			  libft/ft_putstr_fd.c \
-			  libft/ft_putendl_fd.c \
-			  libft/ft_putnbr_fd.c \
-			  libft/ft_split.c \
-			  libft/ft_calloc.c \
-			  ft_printf.c \
+include libft/makefile
 
-LST			= libft/ft_lstnew.c \
-			  libft/ft_lstadd_front.c \
-			  libft/ft_lstsize.c \
-			  libft/ft_lstlast.c \
-			  libft/ft_lstdelone.c \
-			  libft/ft_lstiter.c \
-			  libft/ft_lstadd_back.c \
-			  libft/ft_lstclear.c \
-			  libft/ft_lstmap.c \
+SRCS		= src/ft_printf.c \
+			  src/ft_generates.c \
+				  
+
+
+BONUS		= bonus_src/ft_printf_bonus.c \
+			  bonus_src/ft_generates_bonus.c \
 
 OBJS		= ${SRCS:.c=.o}
-BONUS_OBJS	= ${LST:.c=.o}
+BONUS_OBJS	= ${BONUS:.c=.o}
+ifdef WITH_BONUS
+	SRCS += ${BONUS}
+	OBJS += ${BONUS_OBJS}
+endif
 NAME		= libftprintf.a
+LFNAME		= libft/libft.a
 RM			= rm -f
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -I libft
+CFLAGS		= -Wall -Wextra -Werror
+
 %.c%.o:
 			${CC} ${CFLAGS} $< -o ${<:.c=.o}
-${NAME}:	${OBJS}
+
+${NAME}:	${OBJS} ${LFNAME}
 			ar rcs ${NAME} ${OBJS}
-bonus:	${OBJS} ${BONUS_OBJS}
-			ar rcs ${NAME} ${OBJS} ${BONUS_OBJS}
+bonus:	
+	make WITH_BONUS=1 ${NAME}
+
 all:		${NAME}
 clean:	
-			${RM} ${OBJS} ${BONUS_OBJS}
+			${RM} ${OBJS} ${BONUS_OBJS} && lfclean
 fclean:		clean
-			${RM} ${NAME}
-re:			fclean all
+			${RM} ${NAME} && lffclean
+
+re:			fclean all lfre
+
+.PHONY: all clean fclean re bonus

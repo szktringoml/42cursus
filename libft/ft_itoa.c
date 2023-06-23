@@ -6,11 +6,11 @@
 /*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 08:22:13 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/13 13:07:19 by string           ###   ########.fr       */
+/*   Updated: 2023/06/20 08:51:17 by string           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 static size_t	ft_count_nbr(int n)
 {

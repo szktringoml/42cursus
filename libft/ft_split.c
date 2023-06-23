@@ -42,9 +42,9 @@ static size_t	ft_cnt_nbr_char(char const *s, size_t s_curr, char c)
 
 static int	ft_malloc_fail(char **str, size_t sec)
 {
-	while (str[(int)sec])
+	while (str[sec])
 	{
-		free(str[(int)sec]);
+		free(str[sec]);
 		sec--;
 	}
 	free(str);

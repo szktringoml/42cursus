@@ -6,11 +6,11 @@
 /*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 10:11:32 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/13 12:58:22 by string           ###   ########.fr       */
+/*   Updated: 2023/06/20 08:50:53 by string           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {

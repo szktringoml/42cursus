@@ -6,11 +6,11 @@
 /*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 12:51:47 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/06 09:44:09 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/06/20 08:51:35 by string           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {

@@ -6,11 +6,11 @@
 /*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 07:04:10 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/13 13:04:43 by string           ###   ########.fr       */
+/*   Updated: 2023/06/20 08:50:59 by string           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {

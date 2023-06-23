@@ -6,12 +6,12 @@
 /*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 11:32:12 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/06 07:56:32 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/06/20 08:49:33 by string           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <libft.h>
+#include "libft.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {
