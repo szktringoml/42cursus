@@ -18,6 +18,9 @@ char *get_next_line(int fd)
 	if(fd < 0 || fd == NULL || BUFFER_SIZE < 0)
 		return NULL;
 	ft_input_each_fd(fd, inputs[fd]);
-	
+	if(!inputs[fd])
+		return NULL;
+	line = ft_getline(input[fd]);
+	inputs = ft_reshape(input[fd], ft_strlen(line));	
 	return (line);
 }
