@@ -1,7 +1,8 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -21,7 +22,6 @@
 
 size_t ft_strlen(const char *s);
 char *ft_strchr(const char *s, int c);
-char *ft_strjoin(char const *s1, char const *s2);
 char *get_next_line(int fd);
 void ft_input_each_fd(int fd, char *input);
 char *ft_getline(char *input);

@@ -1,30 +1,27 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/25 07:58:25 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/25 07:58:40 by kousuzuk         ###   ########.fr       */
+/*   Created: 2023/06/25 07:57:22 by kousuzuk          #+#    #+#             */
+/*   Updated: 2023/06/25 13:34:58 by kousuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "get_next_line_bonus.h"
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-
-#include <string.h>
-
-#ifndef BUFFER_SIZE
-	#define BUFFER_SIZE 42
-#endif
-
-size_t ft_strlen(const char *s);
-char *ft_strchr(const char *s, int c);
-char *ft_strjoin(char const *s1, char const *s2);
-char *get_next_line(int fd);
-void ft_input_each_fd(int fd, char *input);
-char *ft_getline(char *input);
-char *ft_reshape(char *input, size_t linelen);
-
-#endif
+char *get_next_line(int fd)
+{
+	char *line;
+	static char *inputs[1024];
+	if(fd < 0 || BUFFER_SIZE < 0)
+		return NULL;
+	ft_input_each_fd(fd, inputs[fd]);
+	if(!inputs[fd])
+		return NULL;
+	line = ft_getline(inputs[fd]);
+	inputs[fd] = ft_reshape(inputs[fd], ft_strlen(line));	
+	return (line);
+}
