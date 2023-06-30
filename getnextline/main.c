@@ -1,9 +1,15 @@
 #include <stdio.h>
 #include "get_next_line.h"
 #include <fcntl.h>
+#include <libc.h>
+
+__attribute__((destructor))
+static void destructor() {
+    system("leaks -q a.out");
+}
+
 int main(){
 	int fd;
-	fd = open("41_no_nl", O_RDWR);
-	printf("%i\n",fd);
-	get_next_line(fd);
+	fd = open("files/empty", O_RDWR);
+	printf("output = %s\n",get_next_line(fd));
 }

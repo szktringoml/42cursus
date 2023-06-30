@@ -6,7 +6,7 @@
 /*   By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 07:58:25 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/25 07:58:40 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/06/30 13:53:44 by kousuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 #include <string.h>
 
 #ifndef BUFFER_SIZE
-	#define BUFFER_SIZE 42
+	#define BUFFER_SIZE 20
 #endif
 
 size_t ft_strlen(const char *s);
 char *ft_strchr(const char *s, int c);
-char *ft_strjoin(char const *s1, char const *s2);
+char *ft_strjoin(char *input, char *str);
 char *get_next_line(int fd);
-void ft_input_each_fd(int fd, char *input);
+char *ft_input_each_fd(int fd, char *input);
 char *ft_getline(char *input);
-char *ft_reshape(char *input, size_t linelen);
+char *ft_reshape(char *input);
 
 #endif
