@@ -11,20 +11,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
 #include <string.h>
 
 #ifndef BUFFER_SIZE
-	#define BUFFER_SIZE 42
+#define BUFFER_SIZE 1
 #endif
 
 size_t ft_strlen(const char *s);
 char *ft_strchr(const char *s, int c);
+char *ft_strjoin(char *input, char *str);
 char *get_next_line(int fd);
-void ft_input_each_fd(int fd, char *input);
+char *ft_input_each_fd(int fd, char *input);
 char *ft_getline(char *input);
-char *ft_reshape(char *input, size_t linelen);
+char *ft_reshape(char *input);
 
 #endif

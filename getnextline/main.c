@@ -10,6 +10,6 @@ static void destructor() {
 
 int main(){
 	int fd;
-	fd = open("files/empty", O_RDWR);
+	fd = open("files/41_no_nl", O_RDWR);
 	printf("output = %s\n",get_next_line(fd));
 }

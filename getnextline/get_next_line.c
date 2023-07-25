@@ -15,9 +15,9 @@
 char *get_next_line(int fd)
 {
 	char *line;
-	static char *inputs[1024];
+	static char *inputs[4096];
 	if(fd < 0 || BUFFER_SIZE <= 0)
-		return NULL;
+		return 0;
 	inputs[fd] = ft_input_each_fd(fd, inputs[fd]);
 	if(!inputs[fd])
 		return NULL;
@@ -25,3 +25,5 @@ char *get_next_line(int fd)
 	inputs[fd] = ft_reshape(inputs[fd]);	
 	return (line);
 }
+
+
