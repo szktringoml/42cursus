@@ -76,8 +76,9 @@ void ft_nodeadd_back(s_node **stack, s_node *new)
 		new->prev = last;
 	}
 	else
-	{
+{
 		(*stack)->prev = new;
+		(*stack)->next = new;
 		*stack = new;
 	}
 }

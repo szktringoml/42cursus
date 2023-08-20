@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
 	//座標圧縮
  	coordinate_compression(n, *a_stack);
 	printf("coordinate_compression finish\n");
-	
+	if(issort)	
 	//a_stackの各参照アドレス確認用
 	conf_stack(n, a_stack);
 	//*a_stack = sa(n, a_stack);
