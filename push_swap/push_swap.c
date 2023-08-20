@@ -59,74 +59,50 @@ void conf_stack(size_t n, s_node **a_stack)
 
 void nodeinit(s_node **a_stack, s_node **b_stack)
 {
-	printf("a in\n");
-	(*a_stack)->next = NULL;
-	(*a_stack)->num = NIL;
-	(*a_stack)->prev = NULL;
-
-	printf("b in\n");
-	(*b_stack)->next = NULL;
-	(*b_stack)->num = NIL;
-	(*b_stack)->prev = NULL;
+	s_node *a_nullnode;
+	s_node *b_nullnode;
+	//新しくnodeを作成しa_stack = &nodeとする
+	a_nullnode = ft_nodenew(NIL);
+	b_nullnode = ft_nodenew(NIL);
+	
+	a_stack = a_nullnode;
+	b_stack = b_nullnode;
 }
 	
 
-//int main(int argc, char *argv[])
-//{
-//	//s_list list;
-//	size_t n;
-//	s_node **a_stack;
-//	printf("*a_stack p = %p\n",*a_stack);
-//	printf("*a_stack prev = %p\n",(*a_stack)->prev);
-//	printf("b_stack p = %p\n",b_stack);
-//	printf("*b_stack p = %p\n",*b_stack);
-//	(*b_stack)->prev = 0;
-//	printf("*b_stack prev = %p\n",(*b_stack)->prev);
-//	//入力値のエラー処理
-//	n = inputcheck_argcount(argc, 0, argv);//ちゃんとここまで動くか
-//	printf("n = %zu\n", n);
-////	a_stack = ft_calloc(sizeof(s_node), n);
-////	if(!a_stack)
-////	{
-////		write(1,"malloc error",12);
-////		return 0;
-////	}
-//	//nodeへの値の格納
-//	nodeinit(a_stack, b_stack);
-//	printf("nodeinit finish\n");
-//	
-//	storenode(argc, argv, a_stack);
-//	printf("storenode finish\n");
-//	//座標圧縮
-// 	coordinate_compression(n, *a_stack);
-//	printf("coordinate_compression finish\n");
-//	
-//	//a_stackの各参照アドレス確認用
-//	conf_stack(n, a_stack);
-//	//*a_stack = sa(n, a_stack);
-//	
-//	printf("*a_stack = %p\n", *a_stack);
-//	printf("b_stack = %p\n", b_stack);
-//	printf("*b_stack = %p\n", *b_stack);
-//	pb(a_stack, b_stack);
-//	conf_stack(n, a_stack);
-//	//n <= 3の時
-//
-//	//n < 7 の時
-//
-//	//n >= 7の時
-//	
-//	return 0;
-//}
 int main(int argc, char *argv[])
 {
+	//s_list list;
+	size_t n;
 	s_node **a_stack;
 	s_node **b_stack;
+	//入力値のエラー処理
+	n = inputcheck_argcount(argc, 0, argv);//ちゃんとここまで動くか
+	printf("値の数n = %zu\n", n);
+	//nodeへの値の格納
+	nodeinit(a_stack, b_stack);
+	printf("nodeinit finish\n");
 	
-	printf("a_stack p = %p\n",a_stack);
-	printf("b_stack p = %p\n",b_stack);
+	storenode(argc, argv, a_stack);
+	printf("storenode finish\n");
+	//座標圧縮
+ 	coordinate_compression(n, *a_stack);
+	printf("coordinate_compression finish\n");
 	
-	printf("*a_stack p = %lli\n",(*a_stack)->num);
-	*b_stack = 0;
-	printf("*b_stack p = %p\n",*b_stack);
+	//a_stackの各参照アドレス確認用
+	conf_stack(n, a_stack);
+	//*a_stack = sa(n, a_stack);
+	
+	printf("*a_stack = %p\n", *a_stack);
+	printf("b_stack = %p\n", b_stack);
+	printf("*b_stack = %p\n", *b_stack);
+	pb(a_stack, b_stack);
+	conf_stack(n, a_stack);
+	//n <= 3の時
+
+	//n < 7 の時
+
+	//n >= 7の時
+	
+	return 0;
 }
