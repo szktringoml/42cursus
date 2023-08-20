@@ -52,6 +52,8 @@ s_node *ft_nodenew(long long num)
 	if(!new)
 		exit(0);
 	new->num = num;
+	new->next = NULL;
+	new->prev = NULL;
 	return new;
 }
 

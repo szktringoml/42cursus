@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
 	printf("a_stack p = %p\n",a_stack);
 	printf("b_stack p = %p\n",b_stack);
 	
-	printf("*a_stack p = %p\n",*a_stack);
+	printf("*a_stack p = %lli\n",(*a_stack)->num);
 	*b_stack = 0;
 	printf("*b_stack p = %p\n",*b_stack);
 }
