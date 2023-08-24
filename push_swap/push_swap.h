@@ -9,7 +9,7 @@
 typedef struct t_node{
 	struct t_node *prev;
 	long long num;
-	int coord_num;
+	long long coord_num;
 	struct t_node *next;
 }	s_node;
 
@@ -29,12 +29,29 @@ void storenode(int argc, char *argv[], s_node **a_stack);
 
 void coordinate_compression(size_t n, s_node *a_stack);
 
-size_t ft_get_stacksize(s_node **stack);
+size_t ft_get_stacksize(s_node *stack);
 
-s_node *sa(size_t n, s_node **stack);
+void sa(s_node **a_stack, int iswrite);
+
+void sb(s_node **b_stack, int iswrite);
+
+void ss(s_node **a_stack, s_node **b_stack);
+
+void pa(s_node **a_stack, s_node **b_stack);
 
 void pb(s_node **a_stack, s_node **b_stack);
 
+void ra(s_node **a_stack, int iswrite);
+
+void rb(s_node **b_stack, int iswrite);
+
+void rr(s_node **a_stack, s_node **b_stack);
+
+void rra(s_node **a_stack, int iswrite);
+
+void rrb(s_node **b_stack, int iswrite);
+
+void rrr(s_node **a_stack, s_node **b_stack);
 #define NIL 2147483648
 
 #endif

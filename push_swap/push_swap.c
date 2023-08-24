@@ -32,6 +32,22 @@ int isnumsign_str(const char *str)
 	return 1;
 }
 
+//void issorted(s_node *init_a_stack)
+//{
+//	if(ft_get_stacksize(init_a_stack) == 1)
+//		return 1;
+//	while(a_stack->next->num != NIL)
+//	{
+//		now = a_stack->coord_num;
+//		next = a_stack->next->coord_num;
+//		if(now >= next)
+//		if(a_stack->next 
+//		a_stack = a_stack->next;
+//		
+//	
+//
+//	return 0;
+//}
 //void like_quicksort(size_t n, s_node *a_stack)
 //{
 //	s_node **b_stack;
@@ -43,61 +59,82 @@ int isnumsign_str(const char *str)
 //		a_stack = a_stack->next;
 //	}
 //	while(b_stack
-void conf_stack(size_t n, s_node **a_stack)
+void conf_stack(size_t n, s_node *stack, int isa)
 {
 	size_t i=0;
+	if(isa)
+		printf("=====================a_stack status=====================\n");
+	else
+		printf("=====================b_stack status=====================\n");
+
 	while(i<n+1)
 	{
-		printf("-------*a_stack= %lli ------\n",(*a_stack)->num);
-		printf(" *a_stack->prev= %lli \n",(*a_stack)->prev->num);
-		printf(" *a_stack->next= %lli \n",(*a_stack)->next->num);
+		printf("-------*stack= %lli: coordinate = %lli ------\n",stack->num, stack->coord_num);
+		if(n > 0)
+		{
+			printf(" *stack->prev= %lli \n",stack->prev->num);
+			printf(" *stack->next= %lli \n",stack->next->num);
+		}
+		else
+		{
+			printf(" *stack->prev= NULL \n");
+			printf(" *stack->next= NULL \n");
+		}
 		printf("\n");
-		*a_stack = (*a_stack)->next;
+		stack = stack->next;
 		i++;	
 	}
+	printf("======================================================\n");
 }
 
-void nodeinit(s_node **a_stack, s_node **b_stack)
-{
-	s_node *a_nullnode;
-	s_node *b_nullnode;
-	//新しくnodeを作成しa_stack = &nodeとする
-	a_nullnode = ft_nodenew(NIL);
-	b_nullnode = ft_nodenew(NIL);
-	
-	a_stack = a_nullnode;
-	b_stack = b_nullnode;
+void test(s_node **a_stack, s_node **b_stack){
+	//test
+	conf_stack(ft_get_stacksize(*a_stack), *a_stack, 1);
+	rra(a_stack, 1);
+	conf_stack(ft_get_stacksize(*a_stack), *a_stack, 1);
+	pb(a_stack, b_stack);
+	//conf_stack(ft_get_stacksize(*a_stack), *a_stack, 1);
+	//ra(a_stack, 1);	
+	//conf_stack(ft_get_stacksize(*a_stack), *a_stack, 1);
+	pb(a_stack, b_stack);
+	//conf_stack(ft_get_stacksize(*a_stack), *a_stack, 1);
+	//ra(a_stack, 1);	
+	conf_stack(ft_get_stacksize(*a_stack), *a_stack, 1);
+	conf_stack(ft_get_stacksize(*b_stack), *b_stack, 0);
+	//ss(a_stack, b_stack);
+	//conf_stack(ft_get_stacksize(*a_stack), *a_stack, 1);
+	rrb(b_stack, 1);
+	conf_stack(ft_get_stacksize(*b_stack), *b_stack, 0);
+	rrr(a_stack, b_stack);
+	conf_stack(ft_get_stacksize(*a_stack), *a_stack, 1);
+	conf_stack(ft_get_stacksize(*b_stack), *b_stack, 0);
+
 }
-	
+
 
 int main(int argc, char *argv[])
 {
 	//s_list list;
 	size_t n;
-	s_node **a_stack;
-	s_node **b_stack;
+	s_node *a_stack;
+	s_node *b_stack;
+	
 	//入力値のエラー処理
 	n = inputcheck_argcount(argc, 0, argv);//ちゃんとここまで動くか
 	printf("値の数n = %zu\n", n);
 	//nodeへの値の格納
-	nodeinit(a_stack, b_stack);
-	printf("nodeinit finish\n");
+	a_stack = ft_nodenew(NIL);
 	
-	storenode(argc, argv, a_stack);
+	storenode(argc, argv, &a_stack);
 	printf("storenode finish\n");
 	//座標圧縮
- 	coordinate_compression(n, *a_stack);
+ 	coordinate_compression(n, a_stack);
 	printf("coordinate_compression finish\n");
-	if(issort)	
-	//a_stackの各参照アドレス確認用
-	conf_stack(n, a_stack);
-	//*a_stack = sa(n, a_stack);
-	
-	printf("*a_stack = %p\n", *a_stack);
-	printf("b_stack = %p\n", b_stack);
-	printf("*b_stack = %p\n", *b_stack);
-	pb(a_stack, b_stack);
-	conf_stack(n, a_stack);
+	//ソート済みを弾く
+	//if(issortd(a_stack))
+	//	return 0;	
+	b_stack = ft_nodenew(NIL);
+	test(&a_stack, &b_stack);	
 	//n <= 3の時
 
 	//n < 7 の時
