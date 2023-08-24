@@ -45,37 +45,49 @@ void sa(s_node **a_stack, int iswrite)
 	//	write(1, "sb\n", 3);
 }
 
-void sb(s_node **b_stack, int iswrite) 
+void sa(s_node **b_stack, int iswrite) 
 {
-	if((*b_stack)->num == NIL)
-		printf("sa: stackが存在しない");
-	if((*b_stack)->next->num == NIL)
-		printf("sb: stackの要素が1つしかない");
 	s_node *nil_node;
-	s_node *first_node;
 	s_node *second_node;
 	s_node *third_node;
-	nil_node  = (*b_stack)->prev;
-	first_node  = (*b_stack);
-	second_node  = (*b_stack)->next;
-	third_node = (*b_stack)->next->next;
-	first_node->prev = second_node;
-	first_node->next = third_node;
-	second_node->prev = nil_node;
-	second_node->next = first_node;
+	size_t stacksize;
 
-	//nil_nodeのprevはstackの数による
-	if(ft_get_stacksize(*b_stack) == 2)
-		nil_node->prev = first_node;
-	else
-		third_node->prev = first_node;
+	stacksize = ft_get_stacksize(*b_stack);
+	if(stacksize == 0)
+	{	
+		printf("sa: stackが存在しない");
+		exit(0);
+	}
+	else if(stacksize == 1)
+	{
+		printf("sb: stackの要素が1つしかない");
+		exit(0);
+	}
+
+	nil_node  = (*b_stack)->prev;
+	second_node  = (*b_stack)->next;
+
+	(*b_stack)->prev = second_node;
+	second_node->prev = nil_node;
 	nil_node->next = second_node;
+	if(stacksize == 2)
+	{
+		nil_node->prev = (*b_stack);
+		(*b_stack)->next = nil_node;
+	}
+	else
+	{
+		third_node = second_node->next;
+		(*b_stack)->next = third_node;
+		third_node->prev = (*b_stack);
+	}
+	second_node->next = (*b_stack);
 	//if(isa)
-	//	write(1, "sa\n", 3);
-	//else
+	*b_stack = second_node;
 	if(iswrite)
 		write(1, "sb\n", 3);
-	*b_stack = second_node;
+	//else
+	//	write(1, "sb\n", 3);
 }
 void ss(s_node **a_stack, s_node **b_stack) 
 {
