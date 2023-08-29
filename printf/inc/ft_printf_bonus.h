@@ -16,6 +16,7 @@
 # include "../libft/libft.h"
 # include <stdarg.h>
 # include <unistd.h>
+#include <stdio.h>
 
 # define HEXUPPER "0123456789ABCDEF"
 # define HEXLOWER "0123456789abcdef"
@@ -49,7 +50,7 @@ void		recursive_hex_xlx(unsigned int nb, t_format forminfo,
 
 size_t		hub_print_nbr(t_format forminfo, va_list ap);
 
-size_t		ft_perser(char *format, va_list ap);
+size_t		ft_parser(char *format, va_list ap);
 
 void		ft_putchar_fd(char c, int fd);
 

@@ -134,12 +134,14 @@ int main(int argc, char *argv[])
 	//if(issortd(a_stack))
 	//	return 0;	
 	b_stack = ft_nodenew(NIL);
-	test(&a_stack, &b_stack);	
+	//test(&a_stack, &b_stack);	
 	//n <= 3の時
-
-	//n < 7 の時
-
-	//n >= 7の時
-	
+	if(n <= 3)
+		sort_three_or_less(n, &a_stack);
+	else if(4 <= n && n <= 6)
+		sort_six_or_less(n, &a_stack, &b_stack);
+	else if(7 <= n)
+		sort_seven_or_more(n, &a_stack, &b_stack);
+	conf_stack(n, a_stack, 1);
 	return 0;
 }

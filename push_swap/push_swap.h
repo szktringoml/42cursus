@@ -13,6 +13,7 @@ typedef struct t_node{
 	struct t_node *next;
 }	s_node;
 
+void conf_stack(size_t n, s_node *stack, int isa);
 int isinc_space_str(const char *str);
 
 int isnumsign_str(const char *str);
@@ -21,7 +22,7 @@ int inputcheck_argcount(int argc, int n, char *argv[]);
 
 s_node *ft_nodenew(long long num);
 
-void ft_nodeadd_back(s_node **a_stack, s_node *new);
+void ft_nodeadd_back(s_node **a_stack, s_node *newnode);
 
 s_node *ft_nodelast(s_node *a_stack);
 
@@ -52,6 +53,17 @@ void rra(s_node **a_stack, int iswrite);
 void rrb(s_node **b_stack, int iswrite);
 
 void rrr(s_node **a_stack, s_node **b_stack);
+
+void sort_three_or_less(size_t n, s_node **stack);
+
+void sort_six_or_less(size_t n, s_node **a_stack, s_node **b_stack);
+
+void sort_seven_or_more(size_t n,s_node **a_stack, s_node **b_stack);
+void search_value_one_operation(s_node **a_stack, size_t destination);
+void quicksort(size_t range, size_t middle, size_t *search_idx, s_node **a_stack, s_node **b_stack);
+
+void b_middle_upper_pa(size_t middle, size_t *search_idx,s_node **a_stack, s_node **b_stack);
+void b_middle_lower_pa(size_t middle,size_t *search_idx, s_node **a_stack, s_node **b_stack);
 #define NIL 2147483648
 
 #endif

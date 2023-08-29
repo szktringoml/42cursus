@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/ft_printf.h"
+#include "../inc/ft_printf_bonus.h"
 #include "../libft/libft.h"
 #include <stdarg.h>
 #include <stdio.h>
@@ -35,7 +35,6 @@ size_t	gen_s(va_list ap)
 	size_t	count;
 	char	*str;
 	int		ismalloc;
-
 	ismalloc = 0;
 	str = va_arg(ap, char *);
 	if (!str)

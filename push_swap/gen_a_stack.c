@@ -68,26 +68,26 @@ s_node *ft_nodelast(s_node *a_stack)
 	return a_stack;
 }
 
-void ft_nodeadd_back(s_node **stack, s_node *new)
+void ft_nodeadd_back(s_node **stack, s_node *newnode)
 {
 	s_node *last;
 
 	if((*stack)->num != NIL)
 	{
 		last = ft_nodelast(*stack);
-		new->prev = last;
-		new->next = last->next;
-		last->next->prev = new;
-		last->next = new;
-		new->prev = last;
+		newnode->prev = last;
+		newnode->next = last->next;
+		last->next->prev = newnode;
+		last->next = newnode;
+		newnode->prev = last;
 	}
 	else
 	{
-		new->prev = *stack;
-		new->next = *stack;
-		(*stack)->prev = new;
-		(*stack)->next = new;
-		*stack = new;
+		newnode->prev = *stack;
+		newnode->next = *stack;
+		(*stack)->prev = newnode;
+		(*stack)->next = newnode;
+		*stack = newnode;
 
 	}
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/ft_printf.h"
+#include "../inc/ft_printf_bonus.h"
 #include "../libft/libft.h"
 #include <stdarg.h>
 #include <stdio.h>
@@ -50,7 +50,7 @@ size_t	hub_print_nbr(t_format forminfo, va_list ap)
 	return (print_nbr);
 }
 
-size_t	ft_perser(char *format, va_list ap)
+size_t	ft_parser(char *format, va_list ap)
 {
 	t_format	forminfo;
 
@@ -64,6 +64,12 @@ size_t	ft_perser(char *format, va_list ap)
 		if (*format == ' ')
 			forminfo.space = 1;
 		format++;
+	}
+	printf("%c",*format);
+	if(!ft_strchr(SPECS, *format))
+	{
+		write(1,"-----Error-----\n",11);
+		return 0;
 	}
 	forminfo.spec = *format;
 	return (hub_print_nbr(forminfo, ap));
@@ -81,7 +87,7 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			if (*(++format))
-				print_nbr += ft_perser((char *)format, ap);
+				print_nbr += ft_parser((char *)format, ap);	
 			while (*format && !ft_strchr(SPECS, *format))
 				format++;
 		}

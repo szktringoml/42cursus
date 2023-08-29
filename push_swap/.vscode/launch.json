@@ -9,14 +9,9 @@
             "request": "launch",
             "name": "Debug",
             "program": "${workspaceFolder}/a.out",
-            "cwd": "${workspaceFolder}",
-            "args": [
-                "101",
-                "24",
-                "14 412",
-                "55"
-            ]
-            
+            "args": ["11","10","9","8","7","6","5","4","2","3","1"],
+            "cwd": "${workspaceFolder}"
+ 
         }
     ]
 }

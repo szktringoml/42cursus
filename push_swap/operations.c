@@ -45,7 +45,7 @@ void sa(s_node **a_stack, int iswrite)
 	//	write(1, "sb\n", 3);
 }
 
-void sa(s_node **b_stack, int iswrite) 
+void sb(s_node **b_stack, int iswrite) 
 {
 	s_node *nil_node;
 	s_node *second_node;
