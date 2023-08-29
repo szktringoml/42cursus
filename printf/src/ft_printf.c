@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/ ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 13:42:02 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/25 07:08:58 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:23:31 by kousuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,28 +66,38 @@ size_t	ft_parser(char *format, va_list ap)
 	forminfo.spec = *format;
 	return (hub_print_nbr(forminfo, ap));
 }
+
 int invalid_format(char *format)
 {
-	if(!ft_strchr(SPECS, *format) && !ft_strchr(FLAGS, *format))
+	while(*format)
 	{
-		write(1, "Error", 5);
-		return 1;
-	}
-	if(ft_strchr(FLAGS, *format))
-	{
-		if(!ft_strchr(SPECS, *(++format)))
+		if(*format++ == '%')
 		{
-			write(1, "Error", 5);
-			return 1;
+			//printf("format1 = %c\n", *format);
+			if(!ft_strchr(SPECS, *(format)))
+			{
+			//	printf("format2 = %c\n", *format);
+				write(1, "Error", 5);
+				return 1;
+			}	
+			if(ft_strchr(FLAGS, *(format)) && !ft_strchr(SPECS, *(++format)))
+			{
+			//	printf("format2 = %c\n", *format);
+				write(1, "Error", 5);
+				return 1;
+			}	
 		}
-	}
-	return 0;
+	}	
+	return 0;	
 }
+
 int	ft_printf(const char *format, ...)
 {
 	size_t	print_nbr;
 	va_list	ap;
 
+	if(invalid_format((char *)format))
+		return 0; 
 	print_nbr = 0;
 	va_start(ap, format);
 	while (*format)
@@ -95,12 +105,8 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 		{
 			if (*(++format))
-			{
-				if(invalid_format((char *)format))
-					return 0;
 				print_nbr += ft_parser((char *)format, ap);
-			}
-			while (*format && (ft_strchr(SPECS, *format) || ft_strchr(FLAGS, *format)))
+			while (*format && !ft_strchr(SPECS, *format))
 				format++;
 		}
 		else

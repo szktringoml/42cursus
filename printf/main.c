@@ -4,7 +4,8 @@
 int main(void)
 {
 	char a = 'x';
-	char *str = NULL;
+	//char *str = NULL;
 	char *c = &a;
-	ft_printf("%w %c + %p", a, c);
+	ft_printf("%s %w %c %c %p %e\n", "strstr", 'c', a, c);
+	//printf("%s %w %c %c %p %ei\n", "strstr", 'c', a, c);
 }
