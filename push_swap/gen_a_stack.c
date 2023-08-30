@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "inc/push_swap.h"
 
 int inputcheck_argcount(int argc, int n, char *argv[])
 {
@@ -145,7 +145,7 @@ void coordinate_compression(size_t n, s_node *a_stack)
 		}
 		
 		a_stack->coord_num = small_cnt;
-		printf("座標:%zu\n",small_cnt);
+		//printf("座標:%zu\n",small_cnt);
 		small_cnt = 0;
 		a_stack = a_stack->next;
 		//printf("%zu番目の引数は%d番目に大きい\n", i, a_stack[i-1].coord_num);

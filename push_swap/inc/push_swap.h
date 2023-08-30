@@ -58,10 +58,8 @@ void rrr(s_node **a_stack, s_node **b_stack);
 
 void sort_three_or_less(size_t n, s_node **stack);
 
-void search_value_operation(s_node **a_stack, size_t destination);
 void sort_six_or_less(size_t n, s_node **a_stack, s_node **b_stack);
 
-void search_rangevalue_operation(s_node **a_stack, size_t search_range_max);
 void sort_seven_or_more(size_t n,s_node **a_stack, s_node **b_stack);
 
 #define NIL 2147483648

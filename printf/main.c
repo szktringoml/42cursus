@@ -6,6 +6,9 @@ int main(void)
 	char a = 'x';
 	//char *str = NULL;
 	char *c = &a;
-	ft_printf("%s %w %c %c %p %e\n", "strstr", 'c', a, c);
-	//printf("%s %w %c %c %p %ei\n", "strstr", 'c', a, c);
+	printf("========================\n");
+	printf("%i\n", ft_printf(" %% "));
+	printf("========================\n");
+	printf("%i\n", printf(" %% "));
+	printf("========================\n");
 }

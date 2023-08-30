@@ -1,4 +1,4 @@
-/ ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
@@ -67,29 +67,28 @@ size_t	ft_parser(char *format, va_list ap)
 	return (hub_print_nbr(forminfo, ap));
 }
 
-int invalid_format(char *format)
-{
-	while(*format)
-	{
-		if(*format++ == '%')
-		{
-			//printf("format1 = %c\n", *format);
-			if(!ft_strchr(SPECS, *(format)))
-			{
-			//	printf("format2 = %c\n", *format);
-				write(1, "Error", 5);
-				return 1;
-			}	
-			if(ft_strchr(FLAGS, *(format)) && !ft_strchr(SPECS, *(++format)))
-			{
-			//	printf("format2 = %c\n", *format);
-				write(1, "Error", 5);
-				return 1;
-			}	
-		}
-	}	
-	return 0;	
-}
+//int invalid_format(char *format)
+//{
+//	while(*format)
+//	{
+//		if(*(format++) == '%')
+//		{
+//			if(*format == '%')
+//				format++;
+//			else if(!ft_strchr(SPECS, *(format)))
+//			{
+//				write(1, "Error", 5);
+//				return 1;
+//			}	
+//			else if(ft_strchr(FLAGS, *(format)) && !ft_strchr(SPECS, *(++format)))
+//			{
+//				write(1, "Error", 5);
+//				return 1;
+//			}	
+//		}
+//	}	
+//	return 0;	
+//}
 
 int	ft_printf(const char *format, ...)
 {

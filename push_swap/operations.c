@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "inc/push_swap.h"
 //s--------------------------------------------------------------
 void sa(s_node **a_stack, int iswrite) 
 {

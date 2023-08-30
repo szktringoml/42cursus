@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "inc/push_swap.h"
 
 int isinc_space_str(const char *str)
 {
@@ -32,33 +32,21 @@ int isnumsign_str(const char *str)
 	return 1;
 }
 
-//void issorted(s_node *init_a_stack)
-//{
-//	if(ft_get_stacksize(init_a_stack) == 1)
-//		return 1;
-//	while(a_stack->next->num != NIL)
-//	{
-//		now = a_stack->coord_num;
-//		next = a_stack->next->coord_num;
-//		if(now >= next)
-//		if(a_stack->next 
-//		a_stack = a_stack->next;
-//		
-//	
-//
-//	return 0;
-//}
-//void like_quicksort(size_t n, s_node *a_stack)
-//{
-//	s_node **b_stack;
-//	while(a_stack->next != NIL)
-//	{
-//		if(a_stack->coord_num < (n/2))
-//			//bにpush
-//			pb(a_stack, *b_stack);
-//		a_stack = a_stack->next;
-//	}
-//	while(b_stack
+int issorted(s_node *a_stack)
+{
+	if(ft_get_stacksize(a_stack) == 1)
+		return 1;
+	a_stack = a_stack->next;
+	while(a_stack->coord_num != NIL)
+	{
+		if(a_stack->prev->coord_num >= a_stack->coord_num)
+			return 0;
+		a_stack = a_stack->next;
+	}	
+	//printf("sorted!!");
+	return 1;
+}
+
 void conf_stack(size_t n, s_node *stack, int isa)
 {
 	size_t i=0;
@@ -121,27 +109,28 @@ int main(int argc, char *argv[])
 	
 	//入力値のエラー処理
 	n = inputcheck_argcount(argc, 0, argv);//ちゃんとここまで動くか
-	printf("値の数n = %zu\n", n);
+	//printf("値の数n = %zu\n", n);
 	//nodeへの値の格納
 	a_stack = ft_nodenew(NIL);
 	
 	storenode(argc, argv, &a_stack);
-	printf("storenode finish\n");
+	//printf("storenode finish\n");
 	//座標圧縮
  	coordinate_compression(n, a_stack);
 	printf("coordinate_compression finish\n");
 	//ソート済みを弾く
-	//if(issortd(a_stack))
-	//	return 0;	
+	if(issorted(a_stack))
+		return 0;	
 	b_stack = ft_nodenew(NIL);
 	//test(&a_stack, &b_stack);	
 	//n <= 3の時
+	conf_stack(ft_get_stacksize(a_stack), a_stack, 1);
 	if(n <= 3)
 		sort_three_or_less(n, &a_stack);
 	else if(4 <= n && n <= 6)
 		sort_six_or_less(n, &a_stack, &b_stack);
 	else if(7 <= n)
 		sort_seven_or_more(n, &a_stack, &b_stack);
-	conf_stack(n, a_stack, 1);
+	//conf_stack(ft_get_stacksize(a_stack), a_stack, 1);
 	return 0;
 }

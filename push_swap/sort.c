@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "inc/push_swap.h"
 void sort_three_or_less(size_t n, s_node **stack)
 {
 	s_node *first;
@@ -30,7 +30,7 @@ void sort_three_or_less(size_t n, s_node **stack)
 	}
 }
 
-void search_value_one_operation(s_node **a_stack, size_t destination)
+void search_value_operation(s_node **a_stack, size_t destination)
 {
 	size_t	prev_dist_to_destination;
 	size_t	next_dist_to_destination;
@@ -51,9 +51,15 @@ void search_value_one_operation(s_node **a_stack, size_t destination)
 		firstnode = firstnode->next;
 	}
 	if(next_dist_to_destination < prev_dist_to_destination)
-		ra(a_stack, 1);
+	{
+		while(next_dist_to_destination--)
+			ra(a_stack, 1);
+	}
 	else
-		rra(a_stack, 1);
+	{
+		while(prev_dist_to_destination--)
+			rra(a_stack, 1);
+	}
 }
 		
 
@@ -69,7 +75,7 @@ void sort_six_or_less(size_t n, s_node **a_stack, s_node **b_stack)
 			search_coord_num++;
 		}
 		else
-			search_value_one_operation(a_stack, search_coord_num);
+			search_value_operation(a_stack, search_coord_num);
 	}
 	//conf_stack(ft_get_stacksize(*a_stack), *a_stack, 1);
 	sort_three_or_less(ft_get_stacksize(*a_stack), a_stack);
@@ -77,95 +83,86 @@ void sort_six_or_less(size_t n, s_node **a_stack, s_node **b_stack)
 		pa(a_stack, b_stack);
 }
 
-//bのmiddleより以上をpaする
-void b_middle_upper_pa(size_t b_middle, size_t *search_idx, s_node **a_stack, s_node **b_stack)
+
+void search_rangevalue_operation(s_node **a_stack, size_t search_range_max)
 {
-	size_t n;
-	n = ft_get_stacksize(*b_stack);
-	while(n--)
-	{
-		if(b_middle <= (*b_stack)->coord_num)
-			pa(a_stack, b_stack);
-		else
-			rb(b_stack, 1);
+	size_t	prev_dist_to_destination;
+	size_t	next_dist_to_destination;
+	s_node *firstnode;
+	firstnode = *a_stack;
+
+	prev_dist_to_destination = 1;
+	next_dist_to_destination = 1;
+	printf("loop1\n");
+	while( firstnode->prev->coord_num > search_range_max)
+	{	
+		printf(" %lli > %zu \n", firstnode->prev->coord_num, search_range_max);
+		if(firstnode->prev->coord_num != NIL)
+			prev_dist_to_destination++;
+		firstnode = firstnode->prev;
+		//printf("firstnode -> prev -> coordnum = %lli \n", firstnode->prev->coord_num);
 	}
-
-}
-
-//bのmiddleより下をpaする
-void b_middle_lower_pa(size_t b_middle,size_t *search_idx, s_node **a_stack, s_node **b_stack)
-{
-	size_t n;
-	n = ft_get_stacksize(*b_stack);
-	while(n--)
+	firstnode = *a_stack;
+	printf("loop2\n");
+	while(firstnode->next->coord_num > search_range_max)
 	{
-		if(b_middle > (*b_stack)->coord_num)
-		{
-			pa(a_stack, b_stack);
-			if((*a_stack)->coord_num == *search_idx)
-			{
-				ra(a_stack, 1);
-				*search_idx = *search_idx + 1;
-				printf("search_idx = %zu\n", *search_idx);
-			}
-		}
-		else
-			rb(b_stack, 1);
+		next_dist_to_destination++;
+		firstnode = firstnode->next;
 	}
-
-
-}
-
-void quicksort(size_t range, size_t middle, size_t *search_idx, s_node **a_stack, s_node **b_stack)
-{
-	if(middle < *search_idx || middle == 1 || middle == 0)
-		return;
-	//aのmiddle以下の値をpbする
-	while(range--)//b_middle - search_idx回
+	printf("loop3\n");
+	printf(" ---- %zu - %zu ---- \n", next_dist_to_destination, prev_dist_to_destination);
+	if(next_dist_to_destination < prev_dist_to_destination)
 	{
-		if(middle >= (*a_stack)->coord_num)
-			pb(a_stack,b_stack);
-	}
-	
-	size_t b_middle = middle/2;
-	//ここにmiddle以上だった数字の処理
-}
-
-
-void sort_seven_or_more(size_t n, size_t search_idx,  s_node **a_stack, s_node **b_stack)
-{
-	size_t middle;
-	size_t b_middle;
-	//size_t search_idx;
-	//search_idx = 0;
-	middle = n/2;
-	
-	if(search_idx == 0)
-	{
-		while(n--)
-		{
-			if(middle > (*a_stack)->coord_num)
-				pb(a_stack,b_stack);
-			else	
-				ra(a_stack, 1);
-		}
-	}
-	else if((*a_stack)->coord_num >= middle/2)
-	{
-		while(middle < (*a_stack)->coord_num < b_middle)
+		while(next_dist_to_destination--)
+			ra(a_stack, 1);
 	}
 	else
 	{
-		while((*a_stack)->coord_num > middle)
-			pb(a_stack, b_stack);
+		while(prev_dist_to_destination--)
+			rra(a_stack, 1);
 	}
-	b_middle = middle/2;
-	b_middle_upper_pa(middle/2,search_idx, a_stack, b_stack);
-	b_middle_lower_pa(middle/2,search_idx, a_stack, b_stack);
-	//conf_stack(ft_get_stacksize(*a_stack),*a_stack,1);
-	//conf_stack(ft_get_stacksize(*b_stack),*b_stack,0);
-	sort_seven_or_more(middle/2, search_idx ,a_stack, b_stack);
+	printf("======================%zu======================\n",search_range_max);
+	conf_stack(ft_get_stacksize(*a_stack), *a_stack, 1);
+}
+void sort_seven_or_more(size_t n, s_node **a_stack, s_node **b_stack)
+{
+	size_t push_range;
+	size_t search_range_max;
+	size_t push_cnt_remaining;
+	size_t push_cnt;
+	search_range_max = 0;
+	push_cnt = 0;
+	//===========================
 
+	if(n < 10)
+		push_range = 2;
+	else if(10 <= n && n <= 100)
+		push_range = 3;
+	else if(100 <= n && n <= 1000)
+		push_range = 10;
+	else
+		push_range = 20;
+	//===========================
+	while((*a_stack)->coord_num != NIL)
+	{
+		push_cnt_remaining = push_range;
+		search_range_max = search_range_max + push_range;
+		while( push_cnt_remaining)
+		{
+			if((*a_stack)->coord_num < search_range_max)
+			{
+				push_cnt++;
+				pb(a_stack, b_stack);
+				if(push_cnt%2 == 0)//最適化
+					rb(b_stack, 1);
+				push_cnt_remaining--;
+			}
+			else
+				search_rangevalue_operation(a_stack, search_range_max);
+		}
+	}
+	//===========================
 
 }
+
 
