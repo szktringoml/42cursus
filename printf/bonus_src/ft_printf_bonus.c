@@ -5,16 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/24 13:29:31 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/25 07:14:35 by kousuzuk         ###   ########.fr       */
+/*   Created: 2023/06/24 13:42:02 by kousuzuk          #+#    #+#             */
+/*   Updated: 2023/08/29 17:23:31 by kousuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf_bonus.h"
 #include "../libft/libft.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <unistd.h>
+
 
 t_format	ft_createforminfo(void)
 {
@@ -28,7 +26,7 @@ t_format	ft_createforminfo(void)
 	return (forminfo);
 }
 
-size_t	hub_print_nbr(t_format forminfo, va_list ap)
+size_t	hub_print_nbr(t_format forminfo, va_list *ap)
 {
 	size_t	print_nbr;
 
@@ -50,7 +48,7 @@ size_t	hub_print_nbr(t_format forminfo, va_list ap)
 	return (print_nbr);
 }
 
-size_t	ft_parser(char *format, va_list ap)
+size_t	ft_parser(char *format, va_list *ap)
 {
 	t_format	forminfo;
 
@@ -65,14 +63,36 @@ size_t	ft_parser(char *format, va_list ap)
 			forminfo.space = 1;
 		format++;
 	}
-	printf("%c",*format);
-	if(!ft_strchr(SPECS, *format))
-	{
-		write(1,"-----Error-----\n",11);
-		return 0;
-	}
 	forminfo.spec = *format;
 	return (hub_print_nbr(forminfo, ap));
+}
+
+int invalid_format(char *format)
+{
+	while(*format)
+	{
+		if(*(format++) == '%')
+		{
+			if(*format == '%')
+				format++;
+			else if(ft_strchr(FLAGS, *(format)))
+			{
+				while(ft_strchr(FLAGS, *(format)))
+					format++;
+				if(!ft_strchr(SPECS, *(format)))
+				{
+					write(1, "Error", 5);
+					return 1;
+				}
+			}
+			else if(!ft_strchr(SPECS, *(format)))
+			{
+				write(1, "Error", 5);
+				return 1;
+			}	
+		}
+	}	
+	return 0;	
 }
 
 int	ft_printf(const char *format, ...)
@@ -80,14 +100,16 @@ int	ft_printf(const char *format, ...)
 	size_t	print_nbr;
 	va_list	ap;
 
+	if(invalid_format((char *)format))
+		return 0; 
 	print_nbr = 0;
 	va_start(ap, format);
 	while (*format)
 	{
 		if (*format == '%')
-		{
+		{ 
 			if (*(++format))
-				print_nbr += ft_parser((char *)format, ap);	
+				print_nbr += ft_parser((char *)format, &ap);
 			while (*format && !ft_strchr(SPECS, *format))
 				format++;
 		}
@@ -96,8 +118,7 @@ int	ft_printf(const char *format, ...)
 			ft_putchar_fd(*format, 1);
 			print_nbr++;
 		}
-		if (*format)
-			format++;
+		format++;
 	}
 	va_end(ap);
 	return (print_nbr);

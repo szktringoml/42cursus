@@ -5,18 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/24 13:27:54 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/07/11 06:45:28 by string           ###   ########.fr       */
+/*   Created: 2023/06/19 13:14:39 by kousuzuk          #+#    #+#             */
+/*   Updated: 2023/08/29 15:25:16 by kousuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/ft_printf_bonus.h"
+#include "../inc/ft_printf.h"
 #include "../libft/libft.h"
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
 
-size_t	gen_c(t_format forminfo, va_list ap)
+size_t	gen_c(t_format forminfo, va_list *ap)
 {
 	char	c;
 
@@ -25,18 +25,19 @@ size_t	gen_c(t_format forminfo, va_list ap)
 		write(1, "%", 1);
 		return (1);
 	}
-	c = va_arg(ap, int);
+	c = va_arg(*ap, int);
 	ft_putchar_fd(c, 1);
 	return (1);
 }
 
-size_t	gen_s(va_list ap)
+size_t	gen_s(va_list *ap)
 {
 	size_t	count;
 	char	*str;
 	int		ismalloc;
+
 	ismalloc = 0;
-	str = va_arg(ap, char *);
+	str = va_arg(*ap, char *);
 	if (!str)
 	{
 		str = malloc(sizeof(char) * 7);
@@ -50,14 +51,14 @@ size_t	gen_s(va_list ap)
 	return (count);
 }
 
-size_t	gen_diu(t_format forminfo, va_list ap)
+size_t	gen_diu(t_format forminfo, va_list *ap)
 {
 	size_t	print_nbr;
 	int		nb;
 	char	*str;
 
 	print_nbr = 0;
-	nb = va_arg(ap, int);
+	nb = va_arg(*ap, int);
 	if (nb >= 0 && forminfo.plus)
 		print_nbr = write(1, "+", 1);
 	else if (nb >= 0 && forminfo.space)
@@ -72,12 +73,12 @@ size_t	gen_diu(t_format forminfo, va_list ap)
 	return (print_nbr);
 }
 
-size_t	gen_p(va_list ap)
+size_t	gen_p(va_list *ap)
 {
 	size_t	print_nbr;
 	size_t	p;
 
-	p = va_arg(ap, size_t);
+	p = va_arg(*ap, size_t);
 	print_nbr = write(1, "0x", 2);
 	if (p == 0)
 	{
@@ -88,12 +89,12 @@ size_t	gen_p(va_list ap)
 	return (print_nbr);
 }
 
-size_t	gen_xlx(t_format forminfo, va_list ap)
+size_t	gen_xlx(t_format forminfo, va_list *ap)
 {
 	size_t			print_nbr;
 	unsigned int	nb;
 
-	nb = va_arg(ap, unsigned int);
+	nb = va_arg(*ap, unsigned int);
 	print_nbr = 0;
 	if (nb == 0)
 		return (write(1, "0", 1));

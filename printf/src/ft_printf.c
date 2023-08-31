@@ -26,7 +26,7 @@ t_format	ft_createforminfo(void)
 	return (forminfo);
 }
 
-size_t	hub_print_nbr(t_format forminfo, va_list ap)
+size_t	hub_print_nbr(t_format forminfo, va_list *ap)
 {
 	size_t	print_nbr;
 
@@ -48,7 +48,7 @@ size_t	hub_print_nbr(t_format forminfo, va_list ap)
 	return (print_nbr);
 }
 
-size_t	ft_parser(char *format, va_list ap)
+size_t	ft_parser(char *format, va_list *ap)
 {
 	t_format	forminfo;
 
@@ -67,28 +67,28 @@ size_t	ft_parser(char *format, va_list ap)
 	return (hub_print_nbr(forminfo, ap));
 }
 
-//int invalid_format(char *format)
-//{
-//	while(*format)
-//	{
-//		if(*(format++) == '%')
-//		{
-//			if(*format == '%')
-//				format++;
-//			else if(!ft_strchr(SPECS, *(format)))
-//			{
-//				write(1, "Error", 5);
-//				return 1;
-//			}	
-//			else if(ft_strchr(FLAGS, *(format)) && !ft_strchr(SPECS, *(++format)))
-//			{
-//				write(1, "Error", 5);
-//				return 1;
-//			}	
-//		}
-//	}	
-//	return 0;	
-//}
+int invalid_format(char *format)
+{
+	while(*format)
+	{
+		if(*(format++) == '%')
+		{
+			if(*format == '%')
+				format++;
+			else if(!ft_strchr(SPECS, *(format)))
+			{
+				write(1, "Error", 5);
+				return 1;
+			}	
+			else if(ft_strchr(FLAGS, *(format)) && !ft_strchr(SPECS, *(++format)))
+			{
+				write(1, "Error", 5);
+				return 1;
+			}	
+		}
+	}	
+	return 0;	
+}
 
 int	ft_printf(const char *format, ...)
 {
@@ -102,9 +102,9 @@ int	ft_printf(const char *format, ...)
 	while (*format)
 	{
 		if (*format == '%')
-		{
+		{ 
 			if (*(++format))
-				print_nbr += ft_parser((char *)format, ap);
+				print_nbr += ft_parser((char *)format, &ap);
 			while (*format && !ft_strchr(SPECS, *format))
 				format++;
 		}

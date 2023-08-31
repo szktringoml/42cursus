@@ -6,11 +6,11 @@
 /*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 13:10:56 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/07/07 06:40:22 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/07/07 06:39:58 by kousuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/ft_printf_bonus.h"
+#include "../inc/ft_printf.h"
 #include <unistd.h>
 
 void	recursive_hex_p(size_t p, size_t *print_nbr)

@@ -33,24 +33,24 @@ typedef struct s_format
 
 int			ft_printf(const char *format, ...);
 
-size_t		gen_c(t_format forminfo, va_list ap);
+size_t		gen_c(t_format forminfo, va_list *ap);
 
-size_t		gen_s(va_list ap);
+size_t		gen_s(va_list *ap);
 
-size_t		gen_diu(t_format forminfo, va_list ap);
+size_t		gen_diu(t_format forminfo, va_list *ap);
 
-size_t		gen_p(va_list ap);
+size_t		gen_p(va_list *ap);
 
-size_t		gen_xlx(t_format forminfo, va_list ap);
+size_t		gen_xlx(t_format forminfo, va_list *ap);
 
 void		recursive_hex_p(size_t p, size_t *print_nbr);
 
 void		recursive_hex_xlx(unsigned int nb, t_format forminfo,
 				size_t *print_nbr);
 
-size_t		hub_print_nbr(t_format forminfo, va_list ap);
+size_t		hub_print_nbr(t_format forminfo, va_list *ap);
 
-size_t		ft_parser(char *format, va_list ap);
+size_t		ft_parser(char *format, va_list *ap);
 
 void		ft_putchar_fd(char c, int fd);
 
