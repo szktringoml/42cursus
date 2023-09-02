@@ -13,6 +13,7 @@ typedef struct t_node{
 	struct t_node *next;
 }	s_node;
 
+int ft_abs(int diff);
 void conf_stack(size_t n, s_node *stack, int isa);
 int isinc_space_str(const char *str);
 

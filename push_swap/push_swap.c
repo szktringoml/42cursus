@@ -117,14 +117,14 @@ int main(int argc, char *argv[])
 	//printf("storenode finish\n");
 	//座標圧縮
  	coordinate_compression(n, a_stack);
-	printf("coordinate_compression finish\n");
+//	printf("coordinate_compression finish\n");
 	//ソート済みを弾く
 	if(issorted(a_stack))
 		return 0;	
 	b_stack = ft_nodenew(NIL);
 	//test(&a_stack, &b_stack);	
 	//n <= 3の時
-	conf_stack(ft_get_stacksize(a_stack), a_stack, 1);
+	//conf_stack(ft_get_stacksize(a_stack), a_stack, 1);
 	if(n <= 3)
 		sort_three_or_less(n, &a_stack);
 	else if(4 <= n && n <= 6)
