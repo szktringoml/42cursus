@@ -23,6 +23,7 @@
 # define HEXLOWER "0123456789abcdef"
 # define SPECS "cspdiuxX%"
 # define FLAGS "+ #"
+
 typedef struct s_format
 {
 	int		minus;

@@ -35,8 +35,8 @@ size_t	gen_s(va_list *ap)
 	str = va_arg(*ap, char *);
 	if (!str)
 	{
-		write(str, "(null)", 7);
-		return 7;
+		write(1, "(null)", 7);
+		return (7);
 	}
 	count = ft_strlen(str);
 	ft_putstr_fd(str, 1);
