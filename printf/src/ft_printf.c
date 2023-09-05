@@ -94,6 +94,8 @@ int	invalid_format(char *format)
 	return (0);
 }
 
+
+
 int	ft_printf(const char *format, ...)
 {
 	size_t	print_nbr;
