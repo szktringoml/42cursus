@@ -13,7 +13,6 @@
 #include "../inc/ft_printf.h"
 #include "../libft/libft.h"
 
-
 t_format	ft_createforminfo(void)
 {
 	t_format	forminfo;
@@ -67,27 +66,32 @@ size_t	ft_parser(char *format, va_list *ap)
 	return (hub_print_nbr(forminfo, ap));
 }
 
-int invalid_format(char *format)
+int	invalid_format(char *format)
 {
-	while(*format)
+	while (*format)
 	{
-		if(*(format++) == '%')
+		if (*(format++) == '%')
 		{
-			if(*format == '%')
+			if (*format == '%')
 				format++;
-			else if(!ft_strchr(SPECS, *(format)))
+			else if (ft_strchr(FLAGS, *(format)))
+			{
+				while (ft_strchr(FLAGS, *(format)))
+					format++;
+				if (!ft_strchr(SPECS, *(format)))
+				{
+					write(1, "Error", 5);
+					return (1);
+				}
+			}
+			else if (!ft_strchr(SPECS, *(format)))
 			{
 				write(1, "Error", 5);
-				return 1;
-			}	
-			else if(ft_strchr(FLAGS, *(format)) && !ft_strchr(SPECS, *(++format)))
-			{
-				write(1, "Error", 5);
-				return 1;
-			}	
+				return (1);
+			}
 		}
-	}	
-	return 0;	
+	}
+	return (0);
 }
 
 int	ft_printf(const char *format, ...)
@@ -95,14 +99,14 @@ int	ft_printf(const char *format, ...)
 	size_t	print_nbr;
 	va_list	ap;
 
-	if(invalid_format((char *)format))
-		return 0; 
+	if (invalid_format((char *)format))
+		return (0);
 	print_nbr = 0;
 	va_start(ap, format);
 	while (*format)
 	{
 		if (*format == '%')
-		{ 
+		{
 			if (*(++format))
 				print_nbr += ft_parser((char *)format, &ap);
 			while (*format && !ft_strchr(SPECS, *format))

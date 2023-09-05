@@ -33,28 +33,30 @@ CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
 BIN_DIR		= bin
 
-%c%.o:
-			${CC} ${CFLAGS} $< -o ${<:.c=.o}
+%.c%.o:
+	${CC} ${CFLAGS} $< -o ${<:.c=.o}
 
-${NAME}:	${OBJS} ${LIBFT}
+${NAME}:	${OBJS}
 			make -C libft
 			cp libft/libft.a .
 			mv libft.a ${NAME}
 			${AR} ${NAME} ${OBJS}
 
+.PHONY: all clean fclean re bonus
+
 bonus:	
 	make WITH_BONUS=1 ${NAME}
 
-all:		${NAME}
+all: ${NAME}
 
 clean:	
-			${RM} ${OBJS} ${BONUS_OBJS}
+	make clean -C libft
+	${RM} ${OBJS} ${BONUS_OBJS}
 
-fclean:		clean
-			make fclean -C libft
-			${RM} ${NAME} libft.a
+fclean:	clean
+	make fclean -C libft
+	${RM} ${NAME} libft.a
 
-re:			fclean all 
+re:			fclean all ;
 
-.PHONY: all clean fclean re bonus
 	

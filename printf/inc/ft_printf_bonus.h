@@ -14,9 +14,10 @@
 # define FT_PRINTF_BONUS_H
 
 # include "../libft/libft.h"
+# include <limits.h>
 # include <stdarg.h>
+# include <stdio.h>
 # include <unistd.h>
-#include <stdio.h>
 
 # define HEXUPPER "0123456789ABCDEF"
 # define HEXLOWER "0123456789abcdef"
@@ -32,6 +33,8 @@ typedef struct s_format
 }			t_format;
 
 int			ft_printf(const char *format, ...);
+
+int			invalid_format(char *format);
 
 size_t		gen_c(t_format forminfo, va_list *ap);
 

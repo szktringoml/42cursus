@@ -12,9 +12,6 @@
 
 #include "../inc/ft_printf.h"
 #include "../libft/libft.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <unistd.h>
 
 size_t	gen_c(t_format forminfo, va_list *ap)
 {
@@ -34,20 +31,15 @@ size_t	gen_s(va_list *ap)
 {
 	size_t	count;
 	char	*str;
-	int		ismalloc;
 
-	ismalloc = 0;
 	str = va_arg(*ap, char *);
 	if (!str)
 	{
-		str = malloc(sizeof(char) * 7);
-		ft_strlcpy(str, "(null)", 7);
-		ismalloc = 1;
+		write(str, "(null)", 7);
+		return 7;
 	}
 	count = ft_strlen(str);
 	ft_putstr_fd(str, 1);
-	if (ismalloc)
-		free(str);
 	return (count);
 }
 
