@@ -13,7 +13,7 @@ typedef struct t_node{
 	struct t_node *next;
 }	s_node;
 
-int ft_abs(int diff);
+int ft_abs(size_t a, size_t b)
 void conf_stack(size_t n, s_node *stack, int isa);
 int isinc_space_str(const char *str);
 
@@ -62,7 +62,7 @@ void sort_three_or_less(size_t n, s_node **stack);
 void search_value_operation(s_node **a_stack, size_t destination);
 void sort_six_or_less(size_t n, s_node **a_stack, s_node **b_stack);
 
-void search_rangevalue_operation(s_node **a_stack, size_t search_range_max);
+void search_rangevalue_operation(s_node **a_stack,s_node **b_stack,  size_t search_range_max);
 void sort_seven_or_more(size_t n,s_node **a_stack, s_node **b_stack);
 
 #define NIL 2147483648

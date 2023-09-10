@@ -44,7 +44,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char *input, char *str)
+char	*ft_strjoin_gnl(char *input, char *str)
 {
 	char	*str_concat;
 	size_t	i;
@@ -102,7 +102,7 @@ char *ft_input_each_fd(int fd, char *input)
 			return NULL;
 		}
 		str[read_status] = '\0';
-		input = ft_strjoin(input, str);
+		input = ft_strjoin_gnl(input, str);
 	}
 	free(str);
 	////printf("%s\n",input);

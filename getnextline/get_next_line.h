@@ -21,7 +21,7 @@
 
 size_t ft_strlen(const char *s);
 char *ft_strchr(const char *s, int c);
-char *ft_strjoin(char *input, char *str);
+char *ft_strjoin_gnl(char *input, char *str);
 char *get_next_line(int fd);
 char *ft_input_each_fd(int fd, char *input);
 char *ft_getline(char *input);
