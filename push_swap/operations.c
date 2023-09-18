@@ -271,7 +271,7 @@ void rrb(s_node **b_stack, int iswrite)
 {
 	if(ft_get_stacksize(*b_stack) == 1 || ft_get_stacksize(*b_stack) == 0)
 	{
-		printf("rra: 要素が1つしかない または 0");
+		printf("rrb: 要素が1つしかない または 0");
 		exit(0);
 	}
 	s_node *nilnode;

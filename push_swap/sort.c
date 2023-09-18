@@ -132,6 +132,63 @@ void search_rangevalue_operation(s_node **a_stack, s_node **b_stack, size_t sear
 	//		rra(a_stack, 1);
 	//}
 }
+
+int search_value_operation_pa(s_node **a_stack, s_node **b_stack, size_t search_value)
+{
+	size_t	prev_dist_to_destination;
+	size_t	next_dist_to_destination;
+	int isprev_push;
+	s_node *searchnode;
+	searchnode = *b_stack;
+	
+	prev_dist_to_destination = 0;
+	next_dist_to_destination = 0;
+	isprev_push = 0;
+	while(searchnode->coord_num != search_value)
+	{	
+		//printf(" %lli > %zu \n", searchnode->coord_num, search_range_max);
+		searchnode = searchnode->prev;
+		if(searchnode->coord_num != NIL)
+			prev_dist_to_destination++;
+	}
+	searchnode = *b_stack;
+	while(searchnode->coord_num != search_value)
+	{
+		searchnode = searchnode->next;
+		next_dist_to_destination++;
+	}
+	//printf(" ---- %zu - %zu ---- \n", next_dist_to_destination, prev_dist_to_destination);
+	if(next_dist_to_destination < prev_dist_to_destination)
+	{
+		while(next_dist_to_destination--)
+		{
+			if((*b_stack)->coord_num == search_value-1)
+			{
+				pa(a_stack, b_stack);
+				isprev_push = 1;
+			}
+			else
+				rb(b_stack, 1);
+		}
+	}
+	else
+	{
+		while(prev_dist_to_destination--)
+		{
+			if((*b_stack)->coord_num == search_value-1)
+			{
+				pa(a_stack, b_stack);
+				isprev_push = 1;
+			}
+			if((*b_stack)->next->coord_num != NIL)
+				rrb(b_stack, 1);
+		}
+	}
+	return isprev_push;
+	//printf("======================%zu======================\n",search_range_max);
+	//conf_stack(ft_get_stacksize(*a_stack), *a_stack, 1);
+}
+
 void sort_seven_or_more(size_t n, s_node **a_stack, s_node **b_stack)
 {
 	size_t push_range;
@@ -140,11 +197,11 @@ void sort_seven_or_more(size_t n, s_node **a_stack, s_node **b_stack)
 	if(n < 10)
 		push_range = 2;
 	else if(10 <= n && n <= 100)
-		push_range = n/14;
-	else if(100 < n && n < 500)
 		push_range = n/10;
+	else if(100 < n && n < 500)
+		push_range = n/14;
 	else
-		push_range = n/22;
+		push_range = n/14;
 	//===========================
 	size_t a_size = n;
 	while((*a_stack)->coord_num != NIL && a_size > 3)
@@ -153,8 +210,6 @@ void sort_seven_or_more(size_t n, s_node **a_stack, s_node **b_stack)
 		pb(a_stack, b_stack);
 		if(push_range < n - 4)
 			push_range++;
-
-
 		if(a_size%2 == 0 && (*b_stack)->next->num != NIL 
 			//&& (*b_stack)->prev->prev->coord_num < (ft_abs((*b_stack)->coord_num, (*b_stack)->next->coord_num))
 			)
@@ -164,7 +219,7 @@ void sort_seven_or_more(size_t n, s_node **a_stack, s_node **b_stack)
 			else
 				rb(b_stack, 1);
 		}
-		if((*b_stack)->next->coord_num != NIL && (*b_stack)->coord_num < (*b_stack)->next->coord_num)
+		if((*b_stack)->coord_num != NIL && (*b_stack)->next->coord_num != NIL && (*b_stack)->coord_num < (*b_stack)->next->coord_num)
 		{
 			if((*a_stack)->next->coord_num != NIL && (*a_stack)->coord_num > (*a_stack)->next->coord_num)
 				ss(a_stack, b_stack);
@@ -178,13 +233,21 @@ void sort_seven_or_more(size_t n, s_node **a_stack, s_node **b_stack)
 	//===========================
 	size_t search_value;
 	search_value = n-4;
+	int isprev_push;
 	while((*b_stack)->coord_num != NIL)
 	{
-		search_value_operation(b_stack, search_value);
+		isprev_push = search_value_operation_pa(a_stack, b_stack, search_value);
 		pa(a_stack, b_stack);
+		if(isprev_push)
+		{
+			if((*b_stack)->coord_num != NIL && (*b_stack)->next->coord_num != NIL && (*b_stack)->coord_num < (*b_stack)->next->coord_num)
+				ss(a_stack, b_stack);
+			else	
+				sa(a_stack, 1);
+			search_value--;
+		}
 		search_value--;
 	}
-	
 }
 
 
