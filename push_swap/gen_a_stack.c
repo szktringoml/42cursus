@@ -6,108 +6,63 @@
 /*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 16:39:52 by string            #+#    #+#             */
-/*   Updated: 2023/09/18 16:39:54 by string           ###   ########.fr       */
+/*   Updated: 2023/09/21 15:12:06 by kousuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "inc/push_swap.h"
+#include "push_swap.h"
+
+void	error_print(void)
+{
+	printf("Error\n");
+	exit(0);
+}
+
+void	inputcheck_incspace(int *n, char *argv)
+{
+	char	**nums;
+	size_t	j;
+
+	j = 0;
+	nums = ft_split(argv, ' ');
+	while (nums[j])
+	{
+		if (isnumsign_str(nums[j]) && INT_MIN <= ft_atoi(nums[j])
+			&& ft_atoi(nums[j]) <= INT_MAX)
+			*n = *n + 1;
+		else
+			error_print();
+		j++;
+		free(nums[j - 1]);
+	}
+	free(nums);
+}
 
 int	inputcheck_argcount(int argc, int n, char *argv[])
 {
-	int		i;
-	int		j;
-	char	**nums;
+	int	i;
 
 	i = 1;
-	j = 0;
 	if (argc == 1)
-	{
-		printf("値が入力されていません");
-		exit(0);
-	}
+		error_print();
 	while (i < argc)
 	{
 		if (isinc_space_str(argv[i]))
-		{
-			nums = ft_split(argv[i], ' ');
-			while (nums[j])
-			{
-				if (isnumsign_str(nums[j]) &&
-					INT_MIN <= ft_atoi(nums[j]) && ft_atoi(nums[j]) <= INT_MAX)
-					n++;
-				else
-				{
-					printf("Error\n");
-					exit(0);
-				}
-				j++;
-			}
-			free(nums);
-		}
+			inputcheck_incspace(&n, argv[i]);
 		else
 		{
-			if (isnumsign_str(argv[i]) &&
-				INT_MIN <= ft_atoi(argv[i]) && ft_atoi(argv[i]) <= INT_MAX)
+			if (isnumsign_str(argv[i]) && INT_MIN <= ft_atoi(argv[i])
+				&& ft_atoi(argv[i]) <= INT_MAX)
 				n++;
 			else
-			{
-				printf("Error\n");
-				exit(0);
-			}
+				error_print();
 		}
 		i++;
 	}
 	return (n);
 }
 
-s_node	*ft_nodenew(long long num)
-{
-	s_node	*new;
-
-	new = malloc(sizeof(s_node));
-	if (!new)
-		exit(0);
-	new->num = num;
-	new->next = NULL;
-	new->prev = NULL;
-	if (new->num == NIL)
-		new->coord_num = NIL;
-	return (new);
-}
-
-s_node	*ft_nodelast(s_node *a_stack)
-{
-	if (!a_stack)
-		return (NULL);
-	while (a_stack->next->num != NIL)
-		a_stack = a_stack->next;
-	return (a_stack);
-}
-
-void	ft_nodeadd_back(s_node **stack, s_node *newnode)
-{
-	s_node	*last;
-
-	if ((*stack)->num != NIL)
-	{
-		last = ft_nodelast(*stack);
-		newnode->prev = last;
-		newnode->next = last->next;
-		last->next->prev = newnode;
-		last->next = newnode;
-		newnode->prev = last;
-	}
-	else
-	{
-		newnode->prev = *stack;
-		newnode->next = *stack;
-		(*stack)->prev = newnode;
-		(*stack)->next = newnode;
-		*stack = newnode;
-	}
-}
-
-void	storenode(int argc, char *argv[], s_node **a_stack)
+void	storenode(int argc, char *argv[], t_node **a_stack)
 {
 	size_t	i;
 	size_t	j;
@@ -126,6 +81,7 @@ void	storenode(int argc, char *argv[], s_node **a_stack)
 			{
 				ft_nodeadd_back(a_stack, ft_nodenew(ft_atoi(nums[j])));
 				j++;
+				free(nums[j - 1]);
 			}
 			free(nums);
 		}
@@ -135,9 +91,9 @@ void	storenode(int argc, char *argv[], s_node **a_stack)
 	}
 }
 
-void	coordinate_compression(size_t n, s_node *a_stack)
+void	coordinate_compression(size_t n, t_node *a_stack)
 {
-	s_node	*search_node;
+	t_node	*search_node;
 	size_t	small_cnt;
 	size_t	search_idx;
 
@@ -149,11 +105,7 @@ void	coordinate_compression(size_t n, s_node *a_stack)
 		while (search_idx)
 		{
 			if (search_node->num == a_stack->num)
-			{
-				printf("Error: 同じ値が引数に含まれる");
-				exit(0);
-			}
-			//printf("search_node->num:%i\n", search_node->num);
+				error_print();
 			if (search_node->num != NIL && a_stack->num > search_node->num)
 				small_cnt++;
 			if (search_node->num != NIL)
@@ -161,25 +113,7 @@ void	coordinate_compression(size_t n, s_node *a_stack)
 			search_node = search_node->next;
 		}
 		a_stack->coord_num = small_cnt;
-		//printf("座標:%zu\n",small_cnt);
 		small_cnt = 0;
 		a_stack = a_stack->next;
-		//printf("%zu番目の引数は%d番目に大きい\n", i, a_stack[i-1].coord_num);
 	}
-}
-
-size_t	ft_get_stacksize(s_node *stack)
-{
-	size_t	len;
-
-	if (stack->num == NIL)
-		return (0);
-	len = 0;
-	while (stack->num != NIL)
-	{
-		//printf("%lli\n", stack->num);
-		len++;
-		stack = stack->next;
-	}
-	return (len);
 }

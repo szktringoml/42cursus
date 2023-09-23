@@ -6,15 +6,22 @@
 #    By: string <string>                            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/18 16:39:58 by string            #+#    #+#              #
-#    Updated: 2023/09/18 16:40:01 by string           ###   ########.fr        #
+#    Updated: 2023/09/21 13:43:30 by string           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 SRC	=	push_swap.c \
-		operations.c \
-		sort.c \
-		gen_a_stack.c
+		s_system.c \
+		p_system.c \
+		r_system.c \
+		rr_system.c \
+		gen_a_stack.c \
+		utils_stack.c \
+		sort_seven_or_more.c \
+		sort_six_or_less.c \
+		utils_sort.c \
+		utils_sort_seven_or_more.c
 OBJS = ${SRC:.c=.o}
 
 LIBFT = ../libft/libft.a

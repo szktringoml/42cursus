@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/18 16:41:01 by string            #+#    #+#             */
-/*   Updated: 2023/09/18 16:41:03 by string           ###   ########.fr       */
+/*   Created: 2023/09/21 15:03:01 by string            #+#    #+#             */
+/*   Updated: 2023/09/21 15:16:24 by kousuzuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,15 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct t_node
+typedef struct s_node
 {
-	struct t_node	*prev;
+	struct s_node	*prev;
 	long long		num;
 	long long		coord_num;
-	struct t_node	*next;
-}					s_node;
+	struct s_node	*next;
+}					t_node;
 
-int					ft_abs(size_t a, size_t b);
-
-void				conf_stack(size_t n, s_node *stack, int isa);
+void				error_print(void);
 
 int					isinc_space_str(const char *str);
 
@@ -36,53 +34,99 @@ int					isnumsign_str(const char *str);
 
 int					inputcheck_argcount(int argc, int n, char *argv[]);
 
-s_node				*ft_nodenew(long long num);
+t_node				*ft_nodenew(long long num);
 
-void				ft_nodeadd_back(s_node **a_stack, s_node *newnode);
+void				ft_nodeadd_back(t_node **a_stack, t_node *newnode);
 
-s_node				*ft_nodelast(s_node *a_stack);
+t_node				*ft_nodelast(t_node *a_stack);
 
-void				storenode(int argc, char *argv[], s_node **a_stack);
+void				storenode(int argc, char *argv[], t_node **a_stack);
 
-void				coordinate_compression(size_t n, s_node *a_stack);
+void				coordinate_compression(size_t n, t_node *a_stack);
 
-int					issorted(s_node *a_stack);
+int					issorted(t_node *a_stack);
 
-size_t				ft_get_stacksize(s_node *stack);
+size_t				ft_get_stacksize(t_node *stack);
 
-void				sa(s_node **a_stack, int iswrite);
+size_t				s_system_node_init(t_node **stack, t_node **nil_node,
+						t_node **second_node);
 
-void				sb(s_node **b_stack, int iswrite);
+void				sa(t_node **a_stack, int iswrite);
 
-void				ss(s_node **a_stack, s_node **b_stack);
+void				sb(t_node **b_stack, int iswrite);
 
-void				pa(s_node **a_stack, s_node **b_stack);
+void				ss(t_node **a_stack, t_node **b_stack);
 
-void				pb(s_node **a_stack, s_node **b_stack);
+void				pa_init(t_node **a_stack, t_node **b_stack,
+						t_node **a_nilnode, t_node **b_secondnode);
 
-void				ra(s_node **a_stack, int iswrite);
+void				pa(t_node **a_stack, t_node **b_stack);
 
-void				rb(s_node **b_stack, int iswrite);
+void				pb_non_b_stack_case(t_node **a_stack, t_node **b_stack,
+						t_node **b_nilnode);
 
-void				rr(s_node **a_stack, s_node **b_stack);
+void				pb(t_node **a_stack, t_node **b_stack);
 
-void				rra(s_node **a_stack, int iswrite);
+void				ra(t_node **a_stack, int iswrite);
 
-void				rrb(s_node **b_stack, int iswrite);
+void				rb(t_node **b_stack, int iswrite);
 
-void				rrr(s_node **a_stack, s_node **b_stack);
+void				rr(t_node **a_stack, t_node **b_stack);
 
-void				sort_three_or_less(size_t n, s_node **stack);
+void				rra(t_node **a_stack, int iswrite);
 
-void				search_value_operation(s_node **a_stack,
-						size_t destination);
-void				sort_six_or_less(size_t n, s_node **a_stack,
-						s_node **b_stack);
+void				rrb(t_node **b_stack, int iswrite);
 
-void				search_rangevalue_operation(s_node **a_stack,
-						s_node **b_stack, size_t search_range_max);
-void				sort_seven_or_more(size_t n, s_node **a_stack,
-						s_node **b_stack);
+void				rrr(t_node **a_stack, t_node **b_stack);
+
+void				sort_three_or_less(size_t n, t_node **stack);
+
+void				sort_six_or_less(size_t n, t_node **a_stack,
+						t_node **b_stack);
+
+void				sort_three_or_less_hub(t_node **stack, t_node *first,
+						t_node *second, t_node *third);
+
+void				sort_seven_or_more(size_t n, t_node **a_stack,
+						t_node **b_stack);
+
+void				search_value(t_node **b_stack, size_t search_value);
+
+void				search_value_operation(t_node **b_stack,
+						size_t prev_dist_to_destination,
+						size_t next_dist_to_destination);
+
+void				search_rangevalue_operation(t_node **a_stack,
+						t_node **b_stack,
+						size_t search_range_max);
+
+size_t				calc_push_range(size_t n);
+
+int					search_value_pa(t_node **a_stack, t_node **b_stack,
+						size_t search_value);
+
+void				search_value_pa_operation_next(t_node **a_stack,
+						t_node **b_stack,
+						size_t search_value,
+						int *isprev_push);
+
+void				search_value_pa_operation_prev(t_node **a_stack,
+						t_node **b_stack,
+						size_t search_value,
+						int *isprev_push);
+
+void				sort_seven_or_more_pb(t_node **a_stack, t_node **b_stack,
+						size_t *push_range, size_t n);
+
+void				sort_seven_or_more_after_pb(t_node **a_stack,
+						t_node **b_stack,
+						size_t *push_range,
+						size_t *a_size);
+
+size_t				calc_prev_dist(t_node searchnode, size_t search_value,
+						int iscalcprev);
+
+void				ft_stackclear(t_node *node);
 
 # define NIL 2147483648
 
