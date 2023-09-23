@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/07/02 13:12:57 by kousuzuk          #+#    #+#              #
+#    Updated: 2023/07/02 13:13:15 by kousuzuk         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 SRCS		= ft_isalpha.c \
 			  ft_isdigit.c \
 			  ft_isalnum.c \
@@ -25,6 +37,7 @@ SRCS		= ft_isalpha.c \
 			  ft_strjoin.c \
 			  ft_strtrim.c \
 			  ft_itoa.c \
+			  ft_utoa.c \
 			  ft_striteri.c \
 			  ft_putchar_fd.c \
 			  ft_putstr_fd.c \

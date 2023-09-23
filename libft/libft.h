@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kousuzuk <kousuzuk@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: string <string>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 09:38:54 by kousuzuk          #+#    #+#             */
-/*   Updated: 2023/06/13 07:20:21 by kousuzuk         ###   ########.fr       */
+/*   Updated: 2023/07/02 13:38:20 by string           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int					ft_isdigit(int c);
 int					ft_isprint(int c);
 
 char				*ft_itoa(int n);
+
+char				*ft_utoa(unsigned int n);
 
 void				*ft_memchr(const void *s, int c, size_t n);
 

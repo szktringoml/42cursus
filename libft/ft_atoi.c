@@ -14,7 +14,7 @@
 
 int	ft_atoi(const char *str)
 {
-	unsigned int	nb;
+	long int	nb;
 	size_t		i;
 	int			minus_flag;
 
