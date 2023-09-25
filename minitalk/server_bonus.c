@@ -1,48 +1,68 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: string <string>                            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/25 13:55:37 by string            #+#    #+#             */
+/*   Updated: 2023/09/25 14:54:09 by string           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "minitalk_bonus.h"
 
-//clientからのシグナルを受け取った時のアクションを定義する
-//8bit分得たら出力なので、何bit取得したのかを記録する変数が必要
-
-void ft_handler_to_client(pid_t pid, , )
+void	null_terminated_char_notice(pid_t pid)
 {
-	static int shift = 0;
-	static int c = 0;
-	c = c << shift;
-	if(sig == SIGUSER1)
-		c += 1;
-	if(sig == SIGUSER2)
-		c += 0;
-	shift++;
-	if(shift == 8)
+	if (kill(pid, SIGUSER1) == -1)
 	{
-		if(c == 0)
-		{
-			if(kill(pid, SIGUSER1) == -1)
-				exit();//null terminating error
-		} 
-		write(1 ,&c, 1);
-		shift = 0;
-		c = 0;
-		
+		write(STDERR, "kill Error\n", 13);
+		exit(1);
 	}
 }
 
-
-int main()
+void	ft_handler_from_client(int sig, siginfo_t *info, void *context)
 {
-	pid_t pid;
+	static int		shift = 0;
+	static int		c = 0;
+	static pid_t	pid = 0;
+
+	if(info->si_pid != 0)
+		pid = info->si_pid;
+	(void)context;
+	c *= 2;
+	if (sig == SIGUSER1)
+		c += 1;
+	if (sig == SIGUSER2)
+		c += 0;
+	shift++;
+	if (shift == 8)
+	{
+		if (c == 0)
+			null_terminated_char_notice(pid);
+		write(1, &c, 1);
+		shift = 0;
+		c = 0;
+	}
+}
+
+int	main(void)
+{
+	pid_t				pid;
 	struct sigaction	s_sigaction;
 
-	s_sigaction.flag = SIGINFO;
-	s_sigaction.handler = ft_handler_to_client;
-	//起動したらpidを確保(失敗はしない)
+	s_sigaction.sa_mask = sigemptyset(&s_sigaction.sa_mask);
+	s_sigaction.sa_flags = SA_SIGINFO;
+	s_sigaction.sa_sigaction = ft_handler_from_client;
 	pid = getpid();
-	ft_printf("server pid = %s\n", ft_atoi(pid));
-	if(sigaction(SIGUSER1, &s_sigaction, NULL) == -1 || sigaction(SIGUSER2, &s_sigaction, NULL))
-		exit();	
-	//シグナルを待つ
-	while(1)
+	printf("server pid = %i\n", pid);
+	if (sigaction(SIGUSER1, &s_sigaction, NULL) == -1 || sigaction(SIGUSER2,
+			&s_sigaction, NULL))
+	{
+		write(STDERR, "sigaction Error\n", 16);
+		exit(1);
+	}
+	while (1)
 		pause();
-	//終了シグナルが送られてきたら終わる
-	exit();
+	exit(0);
 }
